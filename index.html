@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Three.js</title>
+
+    <!-- Favicon for most browsers -->
+    <link rel="icon" type="image/x-icon" href="/vite/favicon.ico" />
+
+    <!-- SVG Favicon for modern browsers -->
+    <link rel="icon" type="image/svg+xml" href="/vite/favicon.svg" />
+
+<!--    <link rel="icon" href="favicon.ico" sizes="any">-->
+<!--    <link rel="icon" href="./favicon.svg" type="image/svg+xml">-->
+    <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+<div id="controls">
+    <!-- Camera Controls -->
+    <h2>Camera</h2>
+    <label>Type: <select id="cameraSelect">
+        <option value="perspective">Perspective</option>
+        <option value="orthographic">Orthographic</option>
+    </select></label>
+    <div class="control-row">
+        <label>X: <input type="range" id="cameraX" min="-10" max="10" step="0.1" value="0" /></label>
+        <span class="value-display" id="cameraXValue">0.00</span>
+    </div>
+    <div class="control-row">
+        <label>Y: <input type="range" id="cameraY" min="-10" max="10" step="0.1" value="0" /></label>
+        <span class="value-display" id="cameraYValue">0.00</span>
+    </div>
+    <div class="control-row">
+        <label>Z: <input type="range" id="cameraZ" min="-10" max="20" step="0.1" value="5" /></label>
+        <span class="value-display" id="cameraZValue">5.00</span>
+    </div>
+
+    <!-- Material -->
+    <h2>Material</h2>
+    <label>Type: <select id="materialSelect">
+        <option value="lambert">Lambert</option>
+        <option value="phong">Phong</option>
+        <option value="standard">Standard</option>
+        <option value="basic">Basic</option>
+    </select></label>
+
+    <!-- Light -->
+    <h2>Light</h2>
+    <label>Type: <select id="lightSelect">
+        <option value="spot">Spot</option>
+        <option value="directional">Directional</option>
+        <option value="point">Point</option>
+        <option value="ambient">Ambient</option>
+    </select></label>
+    <div class="control-row">
+        <label>X: <input type="range" id="lightX" min="-10" max="10" step="0.1" value="1" /></label>
+        <span class="value-display" id="lightXValue">1.00</span>
+    </div>
+    <div class="control-row">
+        <label>Y: <input type="range" id="lightY" min="-10" max="10" step="0.1" value="1" /></label>
+        <span class="value-display" id="lightYValue">1.00</span>
+    </div>
+    <div class="control-row">
+        <label>Z: <input type="range" id="lightZ" min="-10" max="10" step="0.1" value="2" /></label>
+        <span class="value-display" id="lightZValue">2.00</span>
+    </div>
+
+    <!-- Objects -->
+    <h2>Objects</h2>
+    <label>Dode Color: <input type="color" id="dodeColor" value="#468585" /></label>
+    <div class="control-row">
+        <label>Dode X: <input type="range" id="dodeX" min="-5" max="5" step="0.1" value="0" /></label>
+        <span class="value-display" id="dodeXValue">0.00</span>
+    </div>
+    <div class="control-row">
+        <label>Dode Y: <input type="range" id="dodeY" min="-5" max="5" step="0.1" value="0" /></label>
+        <span class="value-display" id="dodeYValue">0.00</span>
+    </div>
+    <div class="control-row">
+        <label>Dode Speed X: <input type="range" id="dodeSpeedY" min="0" max="0.2" step="0.01" value="0.01" /></label>
+        <span class="value-display" id="dodeSpeedYValue">0.01</span>
+    </div>
+    <div class="control-row">
+        <label>Dode Speed Y: <input type="range" id="dodeSpeedX" min="0" max="0.2" step="0.01" value="0.01" /></label>
+        <span class="value-display" id="dodeSpeedXValue">0.01</span>
+    </div>
+
+    <label>Box Color: <input type="color" id="boxColor" value="#b4b4b3" /></label>
+    <div class="control-row">
+        <label>Box X: <input type="range" id="boxX" min="-5" max="5" step="0.1" value="0" /></label>
+        <span class="value-display" id="boxXValue">0.00</span>
+    </div>
+    <div class="control-row">
+        <label>Box Y: <input type="range" id="boxY" min="-5" max="5" step="0.1" value="-1.2" /></label>
+        <span class="value-display" id="boxYValue">-1.20</span>
+    </div>
+    <div class="control-row">
+        <label>Box Speed X: <input type="range" id="boxSpeedY" min="0" max="0.1" step="0.005" value="0.005" /></label>
+        <span class="value-display" id="boxSpeedYValue">0.01</span>
+    </div>
+</div>
+
+<!-- Mobile message for screens < 1000px -->
+<div id="mobile-message">
+    <h2>For full experience open the website on a larger screen</h2>
+</div>
+
+<canvas id="canvas"></canvas>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
