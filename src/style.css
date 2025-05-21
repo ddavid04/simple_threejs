@@ -12,7 +12,7 @@ canvas {
   height: 100vh;
 }
 
-/* === Default: Side Panel for Desktop === */
+/* Controls Panel */
 #controls {
   position: absolute;
   top: 1rem;
@@ -27,6 +27,7 @@ canvas {
   backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease-in-out;
 }
 
 #controls h2 {
@@ -51,10 +52,38 @@ select {
   width: 60%;
   margin-left: auto;
   margin-top: 0.3rem;
+  cursor: pointer;
 }
 
 input[type="range"] {
   touch-action: none;
+  cursor: pointer;
+}
+
+/* Controls toggle button */
+.controls-toggle {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  z-index: 20;
+  background: #0c88d1;
+  color: #ffffff;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 8px 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  display: none; /* Hidden by default, shown in media query */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s;
+}
+
+.controls-toggle:hover {
+  background: #0cb395;
+}
+
+.controls-toggle:active {
+  background: #4a9806;
 }
 
 /* Updated styles for value displays */
@@ -103,48 +132,19 @@ label > select {
   margin-left: 0.5rem;
 }
 
-/* Mobile message styling */
-#mobile-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 1.5rem;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 80%;
-  z-index: 20;
-  display: none; /* Hidden by default, shown in media query */
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-#mobile-message h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #89d4cf;
-}
-
 /* Responsive rules */
 @media (max-width: 1000px) {
   #controls {
-    display: none; /* Hide controls on small screens */
+    padding-top: 2rem;
+    transform: translateX(-110%); /* Hide off-screen by default */
+    transition: transform 0.3s ease-in-out;
   }
 
-  #mobile-message {
-    display: block; /* Show mobile message on small screens */
-  }
-}
-
-/* Handle window resize in JavaScript */
-@media (min-width: 1001px) {
-  #mobile-message {
-    display: none; /* Ensure message is hidden on larger screens */
+  #controls.visible {
+    transform: translateX(0); /* Show on screen when visible class is added */
   }
 
-  #controls {
-    display: flex; /* Ensure controls are visible on larger screens */
+  .controls-toggle {
+    display: block; /* Show toggle button */
   }
 }

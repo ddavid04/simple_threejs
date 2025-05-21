@@ -423,6 +423,30 @@ function updateSlidersFromCamera() {
     isUIChange = false;
 }
 
+// Toggle controls visibility for responsive design
+function toggleControls() {
+    const controlsPanel = get('#controls');
+    if (controlsPanel) {
+        controlsPanel.classList.toggle('visible');
+    }
+}
+
+// Handle responsive controls visibility based on screen size
+function handleResponsiveControls() {
+    const windowWidth = window.innerWidth;
+    const controlsPanel = get('#controls');
+
+    if (!controlsPanel) return;
+
+    if (windowWidth <= 1000) {
+        // On small screens, controls start hidden
+        controlsPanel.classList.remove('visible');
+    } else {
+        // On large screens, controls are always visible
+        controlsPanel.classList.add('visible');
+    }
+}
+
 // Set up event listeners - with checks to handle missing elements
 function setupEventListeners() {
     // Camera position sliders
@@ -574,18 +598,15 @@ function setupEventListeners() {
         orthographicCamera.bottom = -5;
         orthographicCamera.updateProjectionMatrix();
 
-        // Handle responsive visibility
-        const controls = document.getElementById('controls');
-        const mobileMessage = document.getElementById('mobile-message');
-
-        if (width <= 1000) {
-            if (controls) controls.style.display = 'none';
-            if (mobileMessage) mobileMessage.style.display = 'block';
-        } else {
-            if (controls) controls.style.display = 'flex';
-            if (mobileMessage) mobileMessage.style.display = 'none';
-        }
+        // Update responsive controls visibility
+        handleResponsiveControls();
     });
+
+    // Set up controls toggle button
+    const controlsToggle = get('#controls-toggle');
+    if (controlsToggle) {
+        controlsToggle.addEventListener('click', toggleControls);
+    }
 
     // OrbitControls change event
     controls.addEventListener('change', updateSlidersFromCamera);
@@ -658,19 +679,9 @@ try {
     if (document.getElementById('controls')) {
         initUI();
         setupEventListeners();
-    }
 
-    // Check initial screen size for responsive behavior
-    const initialWidth = window.innerWidth;
-    const controls = document.getElementById('controls');
-    const mobileMessage = document.getElementById('mobile-message');
-
-    if (initialWidth <= 1000) {
-        if (controls) controls.style.display = 'none';
-        if (mobileMessage) mobileMessage.style.display = 'block';
-    } else {
-        if (controls) controls.style.display = 'flex';
-        if (mobileMessage) mobileMessage.style.display = 'none';
+        // Initialize responsive controls behavior
+        handleResponsiveControls();
     }
 
     // Force a renderer resize to ensure proper initialization
